@@ -1,0 +1,38 @@
+:root {
+  color-scheme: light;
+
+  --paper: #f3f1dd;
+  --paper-2: #e7e5ca;
+  --rule: #c7c5a6;
+  --ink: #0e2823;
+  --muted: #55665c;
+  --green: #1e5a47;
+  --on-green: #f3f1dd;
+  --red: #a33a24;
+  --ochre: #9e7500;
+
+  --nav-bg: #0e2823;
+  --nav-text: #e8e6c4;
+
+  --radius: 2px;
+
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 16px;
+  --s4: 24px;
+  --s5: 32px;
+  --s6: 48px;
+  --s7: 64px;
+
+  --t-sm: 0.8125rem; /* 13px */
+  --t-md: 1rem; /* 16px */
+  --t-lg: 1.25rem; /* 20px */
+  --t-xl: 1.9375rem; /* 31px */
+
+  --display: 'Alfa Slab One', Georgia, serif;
+  --body: 'IBM Plex Sans', 'Khmer UI', 'Noto Sans Khmer', 'Khmer MN', sans-serif;
+
+  --page: 1040px;
+  --gutter: 24px;
+  --target: 44px;
+}

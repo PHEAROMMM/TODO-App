@@ -1,0 +1,223 @@
+.shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+}
+
+.page {
+    flex: 1;
+    width: 100%;
+    max-width: calc(var(--page) + 2 * var(--gutter));
+    margin: 0 auto;
+    padding: var(--s6) var(--gutter) var(--s7);
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s5);
+}
+
+/* 12 columns, 24px gutters. Main takes 8, rail takes 4. */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: var(--s5);
+    align-items: start;
+}
+
+.grid__main{
+    grid-column: 1 / span 8;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s5);
+    min-width: 0;
+}
+
+.grid__rail{
+    grid-column: 9 / span 4;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s5);
+    min-width: 0;
+}
+
+/* no rail: centre the main column so the page is symmetric */
+.grid__main--solo{
+    grid-column: 3 / span 8;
+}
+
+/* filters on the left, content on the right */
+@media (min-width: 801px) {
+    .grid--rail-left .grid__rail {
+        grid-column: 1 / span 4;
+        grid-row: 1;
+    }
+
+    .grid--rail-left .grid__main {
+        grid-column: 5 / span 8;
+        grid-row: 1;
+    }
+}
+
+@media (max-width: 800px) {
+    .page {
+        padding-top: var(--s5);
+    }
+
+
+    .grid__main,
+    .grid__rail {
+        grid-column: 1/ -1;
+    }
+
+    .grid__rail--first {
+        order: -1;
+    }
+}
+
+/* navbar: a dark band like the storefront; no glow, no icons */
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--nav-bg);
+    color: var(--nav-text);
+}
+
+.nav a:focus-visible,
+.nav button:focus-visible {
+    outline-color: var(--nav-text);
+}
+
+.nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s3);
+    max-width: calc(var(--page) + 2 * var(--gutter));
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+.nav__menu {
+    display: flex;
+}
+
+.nav-brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target);
+    color: var(--nav-text);
+    font-family: var(--display);
+    font-size: var(--t-lg);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--s1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    min-height: calc(var(--target) + var(--s2));
+    padding: 0 var(--s3);
+    color: var(--nav-text);
+    font-size: var(--t-md);
+    text-decoration: none;
+}
+
+/* the line hugs the word: tight line-height, 1px gap, 3px rule */
+.nav-item__label {
+    padding-bottom:1px;
+    border-bottom: 3px solid transparent;
+    line-height: 1.3;
+}
+
+.nav-item:hover .nav-item__label {
+    border-bottom-color: color-mix(in srgb, var(--nav-text) 45%, transparent);
+}
+
+.nav-item[aria-current='page'] {
+    font-weight: 600;
+}
+
+.nav-item[aria-current='page'] .nav-item__label {
+    border-bottom-color: var(--nav-text);
+}
+
+.nav-toggle {
+    display: none;
+    min-height: var(--target);
+    padding: 0 var(--s3);
+    border: 1px solid var(--nav-text);
+    border-radius: var(--radius);
+    background: none;
+    color: var(--nav-text);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .nav__inner {
+        flex-wrap: wrap;
+    }
+    
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav__menu {
+        display: none;
+        width: 100%;
+        padding-bottom: var(--s2);
+    }
+
+    .nav__menu.is-open {
+        display: block;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+    }
+
+    .nav-item {
+        min-height: var(--target);
+        padding: 0 0 0 var(--s3);
+        border-left: 3px solid transparent;
+    }
+
+    .nav-item[aria-current='page'] {
+        border-left-color: var(--nav-text);
+    }
+
+      /* in the stacked mobile menu the current page is marked by the left rule instead */
+    .nav-item[aria-current='page'] .nav-item__label,
+    .nav-item:hover .nav-item__label {
+        border-bottom-color: transparent;
+    }
+}
+
+/* storage warning: the one global error state */
+
+.notice {
+    padding: var(--s3) var(--gutter);
+    border-bottom: 2px solid var(--red);
+    background: var(--paper-2);
+}
+
+.notice__inner {
+    max-width: var(--page);
+    margin: 0 auto;
+}
+
+.notice__title {
+    color: var(--red);
+    font-weight: 600;
+}

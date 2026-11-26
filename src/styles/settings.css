@@ -1,0 +1,27 @@
+.setting-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2) var(--s4);
+  padding: var(--s3) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.setting-row__text {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.setting-row__label {
+  font-weight: 600;
+}
+
+.setting-row__desc {
+  color: var(--muted);
+  font-size: var(--t-sm);
+}
+
+.setting-row__control {
+  flex: none;
+}

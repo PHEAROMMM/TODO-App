@@ -29,6 +29,8 @@ export default function Tasks() {
       ),
     [tasks, filters],
   )
+  const visibleCounts = useMemo(() => countByStatus(visible), [visible])
+
   const activeFilters = [filters.status !== 'all', filters.category !== '', filters.q !== ''].filter(
     Boolean,
   ).length
@@ -77,7 +79,12 @@ export default function Tasks() {
         ) : (
           <TasksEmptyState hasAny onClearFilters={clearFilters} />
         )}
-        <TaskBulkActions counts={counts} onToggleAll={toggleAll} onClearCompleted={handleClearCompleted} />
+        <TaskBulkActions
+          counts={counts}
+          visibleCounts={visibleCounts}
+          onToggleAll={() => toggleAll(visible.map((t) => t.id))}
+          onClearCompleted={handleClearCompleted}
+        />
       </PageLayout>
     </div>
   )

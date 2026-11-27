@@ -56,10 +56,11 @@ export function useTasks() {
   )
 
   const toggleAll = useCallback(
-    () =>
+    (ids) =>
       setTasks((prev) => {
-        const allDone = prev.length > 0 && prev.every((t) => t.done)
-        return prev.map((t) => ({ ...t, done: !allDone }))
+        const target = ids ? prev.filter((t) => ids.includes(t.id)) : prev
+        const allDone = target.length > 0 && target.every((t) => t.done)
+        return prev.map((t) => (!ids || ids.includes(t.id) ? { ...t, done: !allDone } : t))
       }),
     [setTasks],
   )
